@@ -44,5 +44,5 @@ else
 }
 }
 catch {
-    {Write-Host "Exception Occured. This Build Doesn't have any PRID"}
+    Write-Host "Exception Occured. This Build Doesn't have any PRID"
 }
