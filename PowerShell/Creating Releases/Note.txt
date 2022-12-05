@@ -1,0 +1,1 @@
+In this exercise we will be creating release and using gates for delay and will be triggering particular stage of particular release 
