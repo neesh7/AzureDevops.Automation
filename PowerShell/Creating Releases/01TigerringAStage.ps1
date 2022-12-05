@@ -24,9 +24,10 @@ $EnvironmentIds = $releaseInfo.environments | Select-Object id
 Write-Host "Environment id $EnvironmentIds[1].id"
 
 #Triggering Particular Stage 
-
+$Stage2 = $EnvironmentIds[1].id
+#Note: Index is 0 for triggering stage1 and index is 1 for triggering stage2
 #PATCH https://vsrm.dev.azure.com/{organization}/{project}/_apis/Release/releases/{releaseId}/environments/{environmentId}?api-version=6.1-preview.7
-$EnvUrl = "https://vsrm.dev.azure.com/{0}/{1}/_apis/Release/releases/{2}/environments/{3}?api-version=6.1-preview.7" -f $organization, $project, $releaseId, $EnvironmentIds[0].id
+$EnvUrl = "https://vsrm.dev.azure.com/{0}/{1}/_apis/Release/releases/{2}/environments/{3}?api-version=6.1-preview.7" -f $organization, $project, $releaseId, $Stage2
 $envBody='{
     "status": "inProgress"
     }'
