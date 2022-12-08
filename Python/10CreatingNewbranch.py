@@ -37,4 +37,4 @@ def createAzBranch(organization, project, repositoryid,NewBranchName,commitid):
 
 #call this function and pass the relevant values so it can create a new branch for you
 
-createAzBranch("neesh9090" ,"PythonWorks","FLowTrack","users/testBranch","6d163c5739936016e07eccabda99dbe93c0c92d9")
+createAzBranch("orgname" ,"projectname","FLowTrack","users/testBranch","commitid_from_whereyouwishto_do_Branchcut")
