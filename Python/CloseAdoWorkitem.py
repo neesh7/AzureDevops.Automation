@@ -1,11 +1,11 @@
 import os, requests, json, base64, sys
 import LoggerFunction as Logger
 
-PAT = "hh7xiy3eqqs5ohq43lbpl6snukjaaz4a5mwgawblanbgssu3d2ha"
+PAT = "Enter your pat here"
 
 b64 = Logger.getb64(PAT)
 
-organization, project, work_item_id  = "neesh90900","MSVS-FlaskApp","2"
+organization, project, work_item_id  = "orgname/acname","project","2"
 
 # Closing comment for work itmes
 comment = 'Closing work item for test 3'
