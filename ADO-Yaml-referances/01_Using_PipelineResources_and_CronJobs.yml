@@ -1,0 +1,49 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+schedules:
+- cron: '14 18 * * 3'
+  displayName: Weekly Wednesday build
+  branches:
+    include:
+    - main
+    - releases/1992.2
+
+variables:
+  - group: myvariable-group-dev
+  - name: sourceBranch
+    value: $(weeklybranch)
+
+resources:
+  pipelines:
+  - pipeline: mypipeline # identifier to use in pipeline resource variables
+    source: Python.Automations # name of the pipeline that produces the artifact
+    branch: ${{ replace(variables['Build.SourceBranch'], 'refs/heads', '')}}
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+- script: |
+    echo $(resources.pipeline.mypipeline.pipelineID)
+    echo $(resources.pipeline.mypipeline.runName)
+    echo $(resources.pipeline.mypipeline.runID)
+    echo $(resources.pipeline.mypipeline.runURI)
+    echo $(resources.pipeline.mypipeline.sourceBranch)
+    echo $(resources.pipeline.mypipeline.sourceCommit)
+    echo $(resources.pipeline.mypipeline.sourceProvider)
+    echo $(resources.pipeline.mypipeline.requestedFor)
+    echo $(resources.pipeline.mypipeline.requestedForID)
