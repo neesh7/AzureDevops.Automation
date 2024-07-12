@@ -46,7 +46,7 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-# - checkout: self
+- checkout: self
 - checkout: PyCode # This checks out the repository
 - task: PythonScript@0
   inputs:
