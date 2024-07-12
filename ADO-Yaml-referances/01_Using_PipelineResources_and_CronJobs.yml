@@ -1,7 +1,7 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# # Starter pipeline
+# # Start with a minimal pipeline that you can customize to build and deploy your code.
+# # Add steps that build, run tests, deploy, and more:
+# # https://aka.ms/yaml
 
 trigger:
 - main
@@ -23,7 +23,14 @@ resources:
   pipelines:
   - pipeline: mypipeline # identifier to use in pipeline resource variables
     source: Python.Automations # name of the pipeline that produces the artifact
-    branch: ${{ replace(variables['Build.SourceBranch'], 'refs/heads', '')}}
+    # branch: $(sourceBranch)
+  repositories:
+  - repository: PyCode # identifier for the repository resource
+    type: git # type of the repository
+    name: DevOps_Projects/Python.Automations # name of the repository
+    ref: releases/1992.2 # branch reference
+
+  
 
 pool:
   vmImage: ubuntu-latest
@@ -31,13 +38,27 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
+- task: CmdLine@2
+  inputs:
+    script: 'pip install requests'
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+# - checkout: self
+- checkout: PyCode # This checks out the repository
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: '$(Build.SourcesDirectory)/Python.Automations/getbuild.py' # Updated the path to include the repository path
+    arguments: '$(PAT) $(weeklybranch)'
+  condition: eq(variables['Build.Reason'], 'Manual')
+
+
 - script: |
+    echo $(uptakeBuild)
+    echo $(Build.Reason)
     echo $(resources.pipeline.mypipeline.pipelineID)
     echo $(resources.pipeline.mypipeline.runName)
     echo $(resources.pipeline.mypipeline.runID)
