@@ -71,3 +71,13 @@ elif BuildReason == "IndividualCI":
 # print(r)
 
 # Use $(uptakeBuild) and $(uptakeBuild) in upcoming tasks
+
+# ADO-Yaml refs
+# - checkout: self
+# - checkout: PyCode # This checks out the repository
+# - task: PythonScript@0
+#   inputs:
+#     scriptSource: 'filePath'
+#     scriptPath: '$(Build.SourcesDirectory)/Python.Automations/getbuild.py' # Updated the path to include the repository path
+#     arguments: '$(PAT) $(weeklybranch) 9 $(Build.Reason) $(resources.pipeline.mypipeline.runName) $(resources.pipeline.mypipeline.sourceBranch) $(resources.pipeline.mypipeline.runID)'
+#   condition: eq(variables['Build.Reason'], 'Manual')
