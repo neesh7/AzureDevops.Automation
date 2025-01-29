@@ -3,7 +3,7 @@ import requests, json, base64, sys
 
 PAT = sys.argv[1]
 
-organization, project, groupIds = "" ,"DeOps_Projects", 121
+organization, project, groupIds = "" ,"", 121
 
 def ADO_login(PAT):
     username = ''
